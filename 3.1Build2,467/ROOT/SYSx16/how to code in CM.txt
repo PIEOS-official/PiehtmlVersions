@@ -1,0 +1,39 @@
+the head so like this --> T=1
+;JMP(E) T |K
+
+T=1
+;JMP(E)
+
+|K
+Some content for K
+
+|S
+Some content for S
+
+|H
+Some content for H
+
+|A
+Some content for A
+
+|E
+Some content for E
+
+</2>
+
+
+</2>
+ = </0> </1> 2=both 1=normalos+gui 0=DOS
+
+
+;JMP() = jump to ()= (K) for exsample would jump to kernel 
+
+;JMP(L5)=jumps to L-line whatever
+
+T |H = T must start Befor every |H for exsample and ect..
+T=true
+RETURN:() = return output
+List = list output 
+Listin= listin for output or input for input - listin(I)
+
+\\\\\\\\\\\\\\Basic syntax of satern\\\\\\\\\\\\\\\\

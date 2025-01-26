@@ -1,0 +1,45 @@
+S
+F|K
+T
+EXECUTE
+</2>{
+CONTENT:;JMP{E}}
+</0>|H
+F|A
+T
+69
+;TH
+JW
+C:/gui/window_layout.xml|E
+call:[DesenShell]
+4:JW
+HOME: 10
+ELSE_FEM
+H
+Y
+call;SCUFFY:
+{
+30 PRINT "Initializing Step "; X
+20 IF ENV_COMPATIBLE SHELL:</2> THEN RUN_APP
+30 ELSE PRINT "Environment not supported"
+40 END
+100 FUNC RUN_APP
+120 RETURN
+110 EXECUTE
+}
+10 LOAD "C:KERNEL.sys/detec.asm", E
+{A
+T
+0
+;JMP{E}}
+F A
+20 IF HW_READY THEN JMP 50
+;JMP{K}
+</0>|E
+T
+69
+{242x45}
+.EXE
+;JMP{A}
+100 RETURN: ;JMP{A}
+</0>

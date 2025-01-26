@@ -1,0 +1,19 @@
+S
+F|K
+T
+45
+C:KERNEL.sys/REDSEA.
+RETUREN:{
+;JMP{H}
+}|H
+T
+CD:()
+DEFINE:{
+;JMP{K}
+}
+25 HOME
+LIST
+JW
+<2>|A
+F|E
+F
