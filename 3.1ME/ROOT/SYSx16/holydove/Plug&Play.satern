@@ -1,0 +1,158 @@
+T=1
+;JMP(E)
+|S
+;JMP(E) T |S
+T
+1
+
+;JMP{B}                         ; Jump to BIOS configuration section
+
+B
+T
+0
+;BIOS_CONFIG                   ; Label to represent BIOS configuration
+LOAD "C:/SYSx16/drivers/bios_driver.drive", H  ; Load BIOS driver 
+LISTIN
+;JMP(H)
+RETURN:
+;JMP(L33)
+STATE: T
+;JMP(H) 
+                       
+listin(I){
+VID: 0x1234 (Vendor ID)
+PID: 0x5678 (Product ID)
+VID: 0x1234
+PID: 0x0001
+VID: 0x1234
+PID: 0x0002 VID: 0x1234 PID: 0x0003 VID: 0x1234 PID: 0x0004 VID: 0x1234 PID: 0x0005 VID: 0x1234
+PID: 0x0006
+VID: 0x1234 
+PID: 0x0007
+VID: 0x1234
+PID: 0x0008
+}
+LISTIN
+timeout /1
+LIST
+;JMP(L70)
+;JMP(H)
+RETURN:
+;JMP{A}
+timeout /1
+;JMP(K)
+RETURN:
+LISTIN
+;JMP(K)
+|H
+;JMP(E) T
+|H
+RETURN
+;JMP(S)
+LIST
+LISTIN
+if=1
+if=T
+;JMP(S)
+RETURN:
+LISTIN
+if=T
+SET=;JMP{B}
+LOAD "C:/drivers/disk_driver.drive", H
+;JMP(S)
+timeout /2
+;JMP(K)
+|A
+T
+|A
+T
+ELSE_FEM
+    PRINT "Disk Drive not found"
+ENDIF
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0002 THEN
+LOAD "C:/drivers/cdrom_driver.drive", H
+;JMP{B} 
+ELSE_FEM
+    PRINT "CD-ROM Drive not found"
+ENDIF
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0003 THEN 
+    LOAD "C:/drivers/floppy_driver.drive", H   
+    ;JMP{C}                                   
+ELSE_FEM
+    PRINT "Floppy Drive not found"
+ENDIF
+
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0004 THEN 
+    LOAD "C:/drivers/vga_driver.drive", H   
+    ;JMP{D}                                  
+ELSE_FEM
+    PRINT "VGA Device not found"
+ENDIF
+
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0005 THEN 
+    LOAD "C:/drivers/printer_driver.drive", H   
+    ;JMP{E}                                   
+ELSE_FEM
+    PRINT "Printer not found"
+ENDIF
+
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0006 THEN 
+    LOAD "C:/drivers/keyboard_driver.drive", H   
+    ;JMP{F}                                   
+ELSE_FEM
+    PRINT "Keyboard not found"
+ENDIF
+
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0007 THEN 
+    LOAD "C:/drivers/mouse_driver.drive", H  
+    ;JMP{G}                                  
+ELSE_FEM
+    PRINT "Mouse not found"
+ENDIF
+
+IF DEVICE_PRESENT VID: 0x1234 PID: 0x0008 THEN 
+    LOAD "C:/drivers/display_driver.drive", H   
+    ;JMP{H}                                   
+ELSE_FEM
+    PRINT "Display not found"
+ENDIF
+
+RETURN
+timeout /3
+;JMP(K)
+|K
+T
+|K
+S
+T
+100 FUNC RUN_APP
+20 IF DEV_READY THEN CALL HW_FUNC
+;JMP(S)
+LIST
+if=1
+if-T
+RETURN:{1,LIST
+2,LIST
+3,LIST
+120 RETURN
+100 HW_FUNC
+101 RAM{
+1,
+2,
+3,
+S_START = 0x100000
+S_END = 0x200000
+timeout /1
+H_START = 0x200000
+H_END = 0x300000
+timeout /2
+A_START = 0x300000
+A_END = 0x400000
+}
+
+}
+|E
+F
+F=0
+E=0
+</2>

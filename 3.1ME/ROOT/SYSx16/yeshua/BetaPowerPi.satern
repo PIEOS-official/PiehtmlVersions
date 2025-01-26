@@ -1,0 +1,117 @@
+T=1
+;JMP(E)
+|S
+|S
+T
+PRINT=(Gah Pie Just Blue Screend :3)
+RETURN:
+;JMP(K)
+RETURN:
+
+PRINT=(%ROOT%){
+CURSER
+}
+LISTIN=(1,USER){
+dir
+;JMP(A)
+cls
+;JMP(A)
+dev
+;JMP(A)
+VOID
+}
+RETURN:
+;JMP(L10)
+;JMP(A)
+|H
+F
+=0
+|A
+|A
+T
+if=LISTIN=(I,USER,DIR){
+LIST 10 HOME
+}
+timeout /1
+if=LISTIN=(I,USER,cls){
+;JMP(S)
+RETURN:
+LIST
+}
+timeout /1
+if=LISTIN=(I,USER,DEV){
+IF=T
+PRINT=(Pascode?)
+PRINT=(|)
+PRINT=(/)
+PRINT=(-)
+PRINT=(\)
+PRINT=(|)
+Timeout /1
+;JMP(L24)
+}
+timeout /1
+;JMP(L24)
+IF=LISTIN=(I,USER,SW1608FilmoreST)
+timeout /1
+if=LISTIN=(I,USER,VOID){
+X: 10
+Y: 10
+X: 10
+Y: 30
+S
+T
+0
+
+
+TEXT
+CONTENT: "99x46"  
+X: 10                                  
+Y: 10                                
+COLOR: 7                                
+FONT: C:/fonts/default.font|E           
+;JMP{A}                                 
+
+A
+T
+1
+
+;DISPLAY_RAM_STATUS
+TEXT
+CONTENT: "RAM Usage: 0x" + HEX(RAM_USAGE)   
+X: 10                                   
+Y: 30                                    
+COLOR: 8                                  
+FONT: C:/fonts/default.font|E             
+</0>                                     
+}
+timeout /1
+|K
+T=1
+;JMP(E)
+|K
+CALL=(ABXx16FW.js)
+if=1
+if=T
+S
+%SYSTEM%
+CALL=(Kernel.js)
+if=1
+if=T
+S
+%SYSTEM_ROOT%
+ELSE_FEM
+=ERROR
+;JMP(S)
+LISTIN
+RETURN:
+LIST
+10 HOME
+IF ELSE_FEM=0
+;JMP(L16)
+IF=T
+;JMP(S)
+|E
+F
+=0
+</2>

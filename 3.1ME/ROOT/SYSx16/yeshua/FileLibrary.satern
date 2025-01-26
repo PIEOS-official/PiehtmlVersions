@@ -1,0 +1,161 @@
+T=1
+;JMP(E)
+|S
+|S
+C:/files/listing.txt|S                  
+;JMP{B}                             
+
+B
+T
+1
+;LIST_FILES                             
+C:/files/current_directory|S            
+;JMP{C}                               
+
+C
+T
+2
+;SELECT_FILE                             
+X: 10                               
+Y: 5                                  
+W: 200                               
+H: 100                                 
+COLOR: 7   
+C:/files/previous_directory|S           
+;JMP{A}                                
+
+S
+T
+0
+;LIST_FILES                              
+C:/files/current_directory|S            
+
+S
+T
+1
+;DELETE_FILE                              
+DELETE "C:/files/selected_file.txt"       
+;JMP{A}                                 
+
+S
+T
+2
+;OPEN_FILE
+C:/files/selected_file.txt|E  
+;JMP{B}                              
+
+S
+T
+3
+
+C:/files/new_file.txt|S                 
+;JMP{C}                                
+
+
+
+S
+T
+4
+                            
+C:/files/current_directory|S         
+;JMP{B}                               
+
+S
+T
+5
+                   
+X: 10                        
+Y: 10                               
+W: 300                   
+H: 150                          
+COLOR: 7   
+RETURN:
+LIST    
+C:/storage/write_sector|S      
+X: 0x1000                      
+DATA: C:/data_to_write.txt|S    
+</2>                                                                            
+|H
+|H
+T
+S
+T
+1
+
+C:/drivers/storage_driver|H     
+T
+
+|A
+|A
+T
+**.**
+PRINT=(**)
+if
+PRINT=(.**)
+;JMP(E)
+RETURN:
+LIST
+PRINT
+
+|K
+T=1
+;JMP(E)
+T
+|K
+
+S
+T
+0
+;TH
+C:/themes/file_manager.theme|K           
+JW
+;JMP(E)
+|E
+T
+|E
+C:/gui/file_manager_window.xml|E         
+;JMP{A}                             
+
+A
+T
+0
+;LIST_FILES
+FONT: C:/fonts/default.font|E             
+;JMP{D}                               
+
+D
+T
+0
+;PERFORM_OPERATION                      
+;IF DELETE_FILE THEN
+   DELETE "C:/files/selected_file.txt"   
+   PRINT "File Deleted"
+;ELSE_FEM
+   PRINT "Invalid Operation"
+ENDIF
+;JMP{E}                                  
+
+E
+T
+3
+;BACK    
+FONT: C:/fonts/default.font|E            
+;JMP{S}                                
+LISTIN
+timeout /1
+LIST  
+RETURN:
+TIMEOUT /2
+LIST
+if=1
+if=T
+;JMP(A)
+       
+C:/data_to_write.txt|E          
+;JMP{B}                       
+
+B
+T
+0
+;WRITE_DATA                                      
+</2>
