@@ -1,0 +1,305 @@
+ T is true F is false ELSE_FEM is else ;TH is theem JW is wndow ;JMP  after JMP you can put {} with letter inside to jump to other colembs and 0 1 2 3 4 5 6 7 8 9 are difrent reg tags C:/is/path then (S) or (H) is hardwere or softwere tag
+
+
+=====================================================================================================================================================================
+
+
+Setting Registry Entries
+
+S
+T
+0
+
+;TH
+C:/themes/default.theme|K    ; Set the system theme to default
+JW
+C:/gui/window_layout.xml|E   ; Load GUI window layout
+=======================================================================
+
+Conditional Logic
+
+S
+T
+3
+
+;TH
+F                             ; Theme not found
+ELSE_FEM                     ; Fall back to a different theme
+C:/themes/backup.theme|K
+
+
+
+jump logic
+
+S
+T
+1
+
+;JMP{K}                      ; Jump to kernel column to process next steps
+
+
+==========================================================================
+
+Environment Definition
+
+S
+T
+2
+
+C:/programs/app.exe|E        ; Load executable for both environments
+</2>                         ; Specify compatibility with DOSx16 and x32
+
+
+
+
+
+Hardware/Software Specific Configurations
+
+H
+T
+0
+
+C:/drivers/yamaha.drive|H    ; Load hardware driver
+C:/registry/app.config|S     ; Load software-specific settings
+
+
+===============================================================
+
+Syntax Examples
+1. Define and Use a Function
+
+10 LOAD "C:/drivers/yamaha.drive", H  ; Load hardware driver
+20 IF HW_READY THEN JMP 50           ; Check hardware state and jump
+30 PRINT "Hardware not ready"
+40 STOP
+
+50 CALL INIT_SCREEN                  ; Call user-defined function
+60 JMP 100
+
+100 END
+
+500 FUNC INIT_SCREEN                 ; User-defined function
+510 LOAD "C:/gui/window_layout.xml", E
+520 PRINT "Screen initialized"
+530 RETURN
+
+
+=========================================================
+
+Conditional Logic with ELSE_FEM
+
+10 LOAD "C:/themes/default.theme", K
+20 IF THEME_LOADED THEN PRINT "Theme Loaded"
+30 ELSE_FEM
+40 LOAD "C:/themes/backup.theme", K
+50 PRINT "Default Theme Unavailable. Backup Loaded"
+60 END
+
+
+
+
+
+================================================================================
+ Hardware/Software Integration
+
+10 LOAD "C:/hardware/input_device", H  ; Load input device
+20 IF DEV_READY THEN CALL HW_FUNC      ; If device is ready, call function
+30 ELSE PRINT "Device not detected"
+40 STOP
+
+100 HW_FUNC
+110 PRINT "Hardware initialized successfully"
+120 RETURN
+
+
+
+
+========================================================================================
+
+Loops
+
+10 LET X = 0
+20 FOR X = 1 TO 10
+30 PRINT "Initializing Step "; X
+40 NEXT X
+50 END
+
+
+
+==================================================================================
+File Execution and Environment Handling
+
+10 LOAD "C:/programs/app.exe", E
+20 IF ENV_COMPATIBLE </2> THEN RUN_APP
+30 ELSE PRINT "Environment not supported"
+40 END
+
+100 FUNC RUN_APP
+110 EXECUTE "C:/programs/app.exe"
+120 RETURN
+
+
+
+
+
+
+================================================================================
+GUI Window Initialization
+
+S
+T
+0
+
+;TH                         ; Start GUI theme setup
+JW
+C:/rhubarb/desen/window_gui.abx|E  ; Load the GUI window file
+;JMP{A}                     ; Jump to column A for further GUI operations
+
+A
+T
+0
+;DRAW_WINDOW                ; Custom function for window drawing
+X: 50                       ; X position of the window
+Y: 50                       ; Y position of the window
+W: 200                      ; Window width
+H: 150                      ; Window height
+COLOR: 7                    ; Background color (gray)
+</2>                        ; Compatible with both DOSx16 and x32
+
+
+
+
+
+
+
+
+===================================================================================
+Setting Screen Color
+
+S
+T
+0
+
+COLOR
+SET: 4                      ; Set screen background color to red
+MODE: VGA                   ; Use VGA mode for color rendering
+</2>                        ; Compatible with both environments
+
+
+
+
+========================================================================
+Drawing a Pixel
+
+S
+T
+0
+
+PIXEL
+X: 120                      ; X coordinate of the pixel
+Y: 90                       ; Y coordinate of the pixel
+COLOR: 3                    ; Cyan color
+;CALL DRAW_PIXEL            ; Call the system routine to draw the pixel
+</2>                        ; Environment compatibility
+
+
+
+
+
+
+================================================================
+Loading a Driver
+
+S
+T
+0
+
+LOAD_DRIVER
+PATH: C:/drivers/yaweh.drive|H  ; Load the yeshua driver for hardware
+STATE: T                        ; Driver loaded successfully
+</2>                            ; Runs in both environments
+
+ELSE_FEM                       ; If driver fails to load
+PATH: C:/drivers/backup.drive|H ; Load a backup driver
+</2>
+
+
+
+
+
+
+
+
+=================================================================================
+Creating a GUI Button
+
+S
+T
+0
+
+;BUTTON
+LABEL: "OK"                     ; Button text
+X: 100                          ; X coordinate
+Y: 120                          ; Y coordinate
+W: 50                           ; Button width
+H: 20                           ; Button height
+COLOR: 9                        ; Button color (blue)
+FONT: C:/fonts/system.font|E    ; Load system font for the label
+;CALL DRAW_BUTTON               ; Call the system routine to draw the button
+</2>
+
+
+
+
+
+
+============================================================================================
+Displaying Text
+
+S
+T
+0
+
+TEXT
+CONTENT: "Welcome to Pie OS!"   ; Text content
+X: 10                           ; X coordinate
+Y: 10                           ; Y coordinate
+COLOR: 7                        ; Text color (gray)
+FONT: C:/fonts/default.font|E   ; Load default font
+</2>                            ; Environment compatibility
+
+==================================================================================================
+
+
+
+
+]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+Explanation of the Syntax
+
+    Tags for Functions:
+        ;TH for GUI theme setup.
+        ;BUTTON for button creation.
+        PIXEL, TEXT, and COLOR for graphical elements.
+
+    Columns for Logical Grouping:
+        S for software/registry.
+        H for hardware actions (e.g., driver loading).
+
+    Data Attributes:
+        Use X:, Y:, W:, H: for positioning and sizing.
+        PATH: for file paths.
+        STATE: T/F for success or failure.
+
+    Control Flow:
+        ELSE_FEM handles fallbacks.
+        ;JMP{} for jumping between sections or routines.
+        ;CALL invokes custom or system routines.
+
+    Environment Tags:
+        </2> ensures compatibility across DOSx16 and x32 architectures.
+]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+
